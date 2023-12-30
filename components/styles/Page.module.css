@@ -1,0 +1,23 @@
+.wrapper {
+  z-index: 1;
+  position: absolute;
+  left: 40%;
+  top: 35%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+.block {
+  width: 20vw;
+  height: 5vw;
+  background-color: lightblue;
+  border: 5px solid #2A9D8F;
+  transition: transform 0.3s;
+}
+.block:hover{
+   transform: scale(1.1);
+   cursor: pointer;
+}

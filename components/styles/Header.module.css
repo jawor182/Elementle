@@ -1,0 +1,23 @@
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 22.5vh;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-size: 4.5rem;
+  color: #2f9d8f; /* Set color for the logo */
+}
+.secText{
+    font-size: 2rem;
+    color: white;
+}
