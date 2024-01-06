@@ -3,13 +3,14 @@ import Image from "next/image"
 export default function Header(){
     
     return(
+        
         <div className={styles.header}>
             <div className={styles.logo}>
                 <div className={styles.img}> 
                     <Image 
                     src={"/logo.png"}
-                    width={6*16}
-                    height={6*16}
+                    width={4*16}
+                    height={4*16}
                     alt="logo"
                     layout="intrinsic"
                     />
