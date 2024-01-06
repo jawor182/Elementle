@@ -5,5 +5,5 @@ app.get("/",(req,res)=>{
  res.sendFile("index.html")
 })
 app.listen(3000, () => {
-  console.log("App listening on http://localhost:3000");
+  console.log("App is listening on http://localhost:3000");
 });
