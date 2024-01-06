@@ -1,20 +1,18 @@
 .wrapper {
-  z-index: 1;
-  position: absolute;
-  left: 40%;
-  top: 35%;
+  z-index: 1;  
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 2rem;
+  padding-top: 5vh;
 }
 .block {
   width: 20vw;
   height: 5vw;
-  background-color: lightblue;
-  border: 5px solid #2A9D8F;
+  background-color: lightgray;
+  border: 5px solid green;
   transition: transform 0.3s;
 }
 .block:hover{
