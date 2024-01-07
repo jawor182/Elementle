@@ -54,6 +54,12 @@ h2 {
   cursor: pointer;
   transition: transform 0.3s;
   border: 0.3rem solid black;
+  font-size: 3rem;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  align-items: center;
+
+
 }
 
 footer {
@@ -75,4 +81,7 @@ footer {
     width: 5rem;
     height: 6rem;
     margin-top: 3rem;
+}
+img{
+  font-size: medium;
 }
