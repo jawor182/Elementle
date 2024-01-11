@@ -48,14 +48,14 @@ h2 {
 
 .box {
   width: 25vw;
-  min-width: 250px;
+  min-width: 350px;
   height: 12vh;
   background-color: #00a8e8;
   margin: 1rem;
   cursor: pointer;
   transition: transform 0.3s;
   border: 0.3rem solid black;
-  font-size: 3rem;
+  font-size: 2.5rem;
   display: grid;
   grid-template-columns: 1fr 3fr;
   align-items: center;
@@ -77,6 +77,8 @@ footer {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    width: 400px;
+
 }
 .img{
     width: 5rem;
@@ -85,4 +87,7 @@ footer {
 }
 img{
   font-size: medium;
+}
+.text{
+  min-width: 0;
 }
