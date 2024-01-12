@@ -1,3 +1,3 @@
 # Wersja demo elementle
 
-## `node .` lub `node index.js` aby uruchomic
+## `npm run dev` aby uruchomic
