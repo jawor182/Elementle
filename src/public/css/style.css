@@ -76,11 +76,10 @@ a:hover{
   transition: transform 0.3s;
   border: 0.3rem solid black;
   font-size: 2.75rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
   align-items: center;
-
+  justify-items: center;
 
 }
 .box:hover {
@@ -101,5 +100,9 @@ a:hover{
 }
 .text{
   min-width: 250px;
-  text-align: center;
+  text-align: start;
+}
+#footer-link{
+  text-decoration: none;
+  color: inherit;
 }
