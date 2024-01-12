@@ -1,6 +1,5 @@
 # Wersja demo elementle
 
-by odpalic `
+by odpalic`
 node index.js
-
 `
