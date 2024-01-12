@@ -1,3 +1,8 @@
+:root{
+  --bg-color:#00c07f;
+  --box-color:#0db4b9 ;
+  --purple-color:#9068be;
+}
 html,
 body {
   margin: 0;
@@ -9,7 +14,7 @@ body {
 body {
   font-family: "Roboto", sans-serif;
   background-image: url("../images/bg.png");
-  background-color: #006442;
+  background-color: var(--bg-color);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -22,8 +27,9 @@ body {
 nav {
   display: flex;
   justify-content: space-around;
-  background-color: #9966cc;
+  background-color: var(--purple-color);
   padding: 1rem;
+  align-items: center;
 }
 
 nav a {
@@ -50,12 +56,12 @@ h2 {
   width: 25vw;
   min-width: 350px;
   height: 12vh;
-  background-color: #00a8e8;
+  background-color: var(--box-color) ;
   margin: 1rem;
   cursor: pointer;
   transition: transform 0.3s;
   border: 0.3rem solid black;
-  font-size: 2.5rem;
+  font-size: 2.75rem;
   display: grid;
   grid-template-columns: 1fr 3fr;
   align-items: center;
@@ -64,7 +70,7 @@ h2 {
 }
 
 footer {
-  background-color: #9966cc;
+  background-color: var(--purple-color);
   color: #fff;
   text-align: center;
   padding: 1rem;
@@ -90,4 +96,5 @@ img{
 }
 .text{
   min-width: 0;
+  text-align: center;
 }
