@@ -52,6 +52,20 @@ h2 {
   font-size: 5rem;
 }
 
+footer {
+  background-color: var(--purple-color);
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+}
+img{
+  font-size: medium;
+  align-self: center;
+}
+a:hover{
+  text-decoration: underline;
+  color:bisque;
+}
 .box {
   width: 25vw;
   min-width: 350px;
@@ -69,13 +83,6 @@ h2 {
 
 
 }
-
-footer {
-  background-color: var(--purple-color);
-  color: #fff;
-  text-align: center;
-  padding: 1rem;
-}
 .box:hover {
   transform: scale(1.1);
 }
@@ -92,15 +99,7 @@ footer {
     height: 6rem;
     margin-top: 3rem;
 }
-img{
-  font-size: medium;
-  align-self: center;
-}
 .text{
   min-width: 250px;
   text-align: center;
-}
-a:hover{
-  text-decoration: underline;
-  color:bisque;
 }
