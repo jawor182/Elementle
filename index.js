@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 app.use(express.static(__dirname + "/src"));
@@ -17,6 +18,6 @@ app.get("/wlasciwosci", (req, res) => {
 app.get("/znajdowanie", (req, res) => {
   res.sendFile(__dirname + "/src/znajdowanie.html");
 });
-app.listen(3000, () => {
-  console.log("App is listening on http://localhost:3000");
+app.listen(process.env.PORT, () => {
+  console.log(`App is listening on http://localhost:${process.env.PORT}`);
 });
