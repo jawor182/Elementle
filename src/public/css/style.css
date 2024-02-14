@@ -106,7 +106,8 @@ a:hover{
   text-align: start;
 }
 #footer-link{
-  text-decoration: none;
+  text-decoration: underline;
+  font-style: italic;
   color: inherit;
 }
 #box1{
@@ -120,4 +121,8 @@ a:hover{
 }
 #box4{
   background-color: var(--box4-color);
+}
+.image{
+  height: 64px;
+  width: 64px;
 }
