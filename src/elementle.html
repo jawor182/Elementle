@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/public/images/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="./public/css/style.css" />
+    <link rel="stylesheet" href="./public/css/elementle.css">
+    <script src="./public/js/elementle.js"></script>
     <title>Elementle</title>
 </head>
 <body>
@@ -14,8 +16,24 @@
         <a href="#">Ustawienia</a>
         <a href="#">Profil</a>
       </nav>
-      <main>
-
+      <main id="elementle">
+        <div class="wrapper">
+            <img src="./public/images/logo.png" alt="img" class="img">
+            <h2>Elementle</h2>
+          </div>
+        <div class="mainBlock">
+            <div  class="imgWrapper">
+                <img id="inputImage" src="./public/images/question-mark.svg" alt="question-mark">
+            </div>
+            <div class="formWrapper">
+                <form action="/elementle" method="post" onsubmit="fetchData(event)">
+                    <input type="text" name="element" id="elementinput" placeholder="Podaj pierwiastek" required>
+                </form>
+            </div>
+        </div>
+        <div id="resultsBlock">
+            
+        </div>
       </main>
       <footer>&copy; 2024 <a id="footer-link" href="https://github.com/jawor182/Elementle/">Elementle</a>. Wszelkie prawa zastrzeżone.</footer>
 </body>
