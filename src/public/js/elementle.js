@@ -30,19 +30,19 @@ async function fetchData(event) {
       const answer = data.mockPierwiastekTodays;
       const guess = data.mockPierwiastekInput;
       guess.nazwa = input;
-      console.log(input);
+      /*console.log(input);
       console.log("Guess:", guess.nazwa);
-      console.log("Answer:", answer.nazwa);
+      console.log("Answer:", answer.nazwa); */
 
       
-      
+      //! Sprawdzenie, czy to co wpisalem od razu odpowiada odpowiedzi 
       if (guess.nazwa.toLowerCase() === answer.nazwa.toLowerCase()) {
         console.log("Works");
       } else {
         console.log("Not works");
       }
 
-      //elementInput.value = "";
+      elementInput.value = "";
     })
     .catch((error) => {
       console.error("Error:", error);
