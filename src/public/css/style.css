@@ -19,7 +19,7 @@ body {
   background-image: url("../images/bg.png");
   background-color: var(--bg-color);
   background-size: cover;
-  background-repeat: no-repeat;
+  
   background-position: center;
   margin: 0;
   display: flex;

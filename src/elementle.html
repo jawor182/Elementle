@@ -6,7 +6,7 @@
     <link rel="shortcut icon" href="/public/images/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="./public/css/style.css" />
     <link rel="stylesheet" href="./public/css/elementle.css">
-    <script src="./public/js/elementle.js"></script>
+    <script defer src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
     <title>Elementle</title>
 </head>
 <body>
@@ -26,19 +26,23 @@
                 <img id="inputImage" src="./public/images/question-mark.svg" alt="question-mark">
             </div>
             <div class="formWrapper">
-                <form action="/elementle" method="post" onsubmit="fetchData(event)">
+                <form hx-post="/elementle" hx-target="#resultsBlock" hx-swap="afterend">
                     <input type="text" name="element" id="elementinput" placeholder="Podaj pierwiastek" required>
                 </form>
             </div>
         </div>
-        <div id="resultsBlock">
-            <div class="result" id="resultItemRodzaj" ></div>
-            <div class="result" id="resultItemMasaAtomowa"></div>
-            <div class="result" id="resultItemRokOdkrycia"></div>
-            <div class="result" id="resultItemOkres"></div>
-            <div class="result" id="resultItemElektroujemnosc"></div>
-            <div class="result" id="resultItemRodzajWartosciowosc"></div>
-        </div>
+        <div class="resultsBlock">
+            <div class="categoriesWrapper">
+                <div class="categories">Nazwa</div>
+                <div class="categories">Rodzaj</div>
+                <div class="categories">Masa</div>
+                <div class="categories">Rok</div>
+                <div class="categories">Elektroujemność</div>
+                <div class="categories">Okres</div>
+                <div class="categories">Wartościowość</div>
+            </div>
+                <div id="resultsBlock"></div>
+        </div>    
       </main>
       <footer>&copy; 2024 <a id="footer-link" href="https://github.com/jawor182/Elementle/">Elementle</a>. Wszelkie prawa zastrzeżone.</footer>
 </body>
