@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./public/css/style.css" />
     <link rel="stylesheet" href="./public/css/elementle.css">
     <script defer src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+    <script defer src="./public/js/clearForm.js"></script>
     <title>Elementle</title>
 </head>
 <body>
@@ -26,8 +27,8 @@
                 <img id="inputImage" src="./public/images/question-mark.svg" alt="question-mark">
             </div>
             <div class="formWrapper">
-                <form hx-post="/elementle" hx-target="#resultsBlock" hx-swap="afterend">
-                    <input type="text" name="element" id="elementinput" placeholder="Podaj pierwiastek" required>
+                <form hx-post="/elementle" hx-target="#resultsBlock" hx-swap="afterend" id="form">
+                    <input type="text" name="element" id="elementinput" placeholder="Podaj pierwiastek" required >
                 </form>
             </div>
         </div>

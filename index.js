@@ -57,22 +57,21 @@ app.post("/elementle", (req, res) => {
   else{
     console.log(`Nie znaleziono takiego elementu jak: ${userGuess}`)
   }
-  if (correctElement) {
+  if (userGuessElement) {
     // Generate the HTML snippet for the correct element
     htmlSnippet = `
-      <div class="resultsWrapper">
-        <div class="resultCorrect">${correctElement.nazwa}</div>
-        <div class="resultCorrect">${correctElement.rodzaj}</div>
-        <div class="resultCorrect">${correctElement.masaAtomowa}</div>
-        <div class="resultCorrect">${correctElement.rokOdkrycia}</div>
-        <div class="resultCorrect">${correctElement.elektroujemnosc}</div>
-        <div class="resultCorrect">${correctElement.okres}</div>
-        <div class="resultCorrect">${correctElement.wartosciowosc.join(
-          ", "
-        )}</div>
-      </div>
-    `;
-    res.send(htmlSnippet);
+    <div class="resultsWrapper">
+      <div class="result${userGuessElement.nazwa === correctElement.nazwa ? 'Correct' : 'Incorrect'}">${userGuessElement.nazwa}</div>
+      <div class="result${userGuessElement.rodzaj === correctElement.rodzaj ? 'Correct' : 'Incorrect'}">${userGuessElement.rodzaj}</div>
+      <div class="result${userGuessElement.masaAtomowa === correctElement.masaAtomowa ? 'Correct' : 'Incorrect'}">${userGuessElement.masaAtomowa}</div>
+      <div class="result${userGuessElement.rokOdkrycia === correctElement.rokOdkrycia ? 'Correct' : 'Incorrect'}">${userGuessElement.rokOdkrycia}</div>
+      <div class="result${userGuessElement.elektroujemnosc === correctElement.elektroujemnosc ? 'Correct' : 'Incorrect'}">${userGuessElement.elektroujemnosc}</div>
+      <div class="result${userGuessElement.okres === correctElement.okres ? 'Correct' : 'Incorrect'}">${userGuessElement.okres}</div>
+      <div class="result${userGuessElement.wartosciowosc.join(", ") === correctElement.wartosciowosc.join(", ") ? 'Correct' : 'Incorrect'}">${userGuessElement.wartosciowosc.join(", ")}</div>
+    </div>
+  `;
+  res.send(htmlSnippet);
+
   }
 });
 app.listen(process.env.PORT, () => {

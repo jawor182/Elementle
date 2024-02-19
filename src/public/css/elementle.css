@@ -63,6 +63,17 @@
     justify-content: center;
     background-color: hsl(106, 61%, 37%);
 }
+.resultIncorrect{
+    width: var(--result-size);
+    height: var(--result-size);
+    border-radius: 50%;
+    color: white;
+    font-size: medium;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: hsl(0, 80%, 52%);
+}
 .categoriesWrapper{
     display:grid ;
     grid-template-columns: 120px 120px 120px 120px 120px 120px 120px ;
