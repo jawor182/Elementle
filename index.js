@@ -2,8 +2,31 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-
+const csv = require("csv-parser");
+const fs = require("fs");
 const router = express.Router();
+
+let elements = [];
+let randomNumber;
+let correctElement;
+fs.createReadStream("./elements.csv")
+  .pipe(csv())
+  .on("data", (row) => {
+    elements.push({
+      nazwa: row.nazwa,
+      rodzaj: row.rodzaj,
+      masaAtomowa: parseFloat(row.masaAtomowa),
+      rokOdkrycia: parseInt(row.rokOdkrycia),
+      okres: parseInt(row.okres),
+      elektroujemnosc: row.elektroujemnosc === "brak" ? null : parseFloat(row.elektroujemnosc),
+      wartosciowosc: row.wartosciowosc === "brak" ? null : row.wartosciowosc.split(",").map(Number),
+    });
+  })
+  .on("end", () => {
+     randomNumber = Math.floor(Math.random() * elements.length);
+     correctElement = elements[randomNumber];
+    console.log(correctElement);
+  });
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -24,72 +47,33 @@ app.get("/znajdowanie", (req, res) => {
   res.sendFile(__dirname + "/src/znajdowanie.html");
 });
 app.post("/elementle", (req, res) => {
-  const formData = req.body.element;
-  function MockPierwiastek({
-    nazwa,
-    rodzaj,
-    masaAtomowa,
-    rokOdkrycia,
-    okres,
-    elektroujemnosc,
-    wartosciowosc,
-  }) {
-    this.nazwa = nazwa;
-    this.rodzaj = rodzaj;
-    this.masaAtomowa = masaAtomowa;
-    this.rokOdkrycia = rokOdkrycia;
-    this.okres = okres;
-    this.elektroujemnosc = elektroujemnosc;
-    this.wartosciowosc = wartosciowosc;
+  let userGuess = req.body.element;
+  let htmlSnippet = "";
+  
+  const userGuessElement = elements.find(el => el.nazwa === userGuess);
+  if (userGuessElement){
+    console.log(`Element znaleziony: ${userGuessElement.nazwa}`)
   }
-  const mockPierwiastekInput = new MockPierwiastek({
-    nazwa: formData,
-    rodzaj: "gaz",
-    masaAtomowa: 1,
-    rokOdkrycia: 1234,
-    okres: 1,
-    elektroujemnosc: 1,
-    wartosciowosc: 1,
-  })
-  const mockPierwiastekTodays = new MockPierwiastek({
-    nazwa: "Wodór",
-    rodzaj: "gaz szlachetny",
-    masaAtomowa: 1,
-    rokOdkrycia: 1234,
-    okres: 1,
-    elektroujemnosc: 1,
-    wartosciowosc: 1,
-  });
-  let results = [];
-  if(mockPierwiastekInput.nazwa.toLowerCase() === mockPierwiastekTodays.nazwa.toLowerCase()){
-    results.push({
-      nazwa: mockPierwiastekTodays.nazwa,
-      rodzaj: mockPierwiastekTodays.rodzaj,
-      masaAtomowa: mockPierwiastekTodays.masaAtomowa,
-      rokOdkrycia: mockPierwiastekTodays.rokOdkrycia,
-      okres: mockPierwiastekTodays.okres,
-      elektroujemnosc: mockPierwiastekTodays.elektroujemnosc,
-      wartosciowosc: mockPierwiastekTodays.wartosciowosc
-    });
+  else{
+    console.log(`Nie znaleziono takiego elementu jak: ${userGuess}`)
   }
-
-  // Convert the array of results to HTML
-  let htmlSnippet = '';
-  results.forEach(result => {
-    htmlSnippet += `
+  if (correctElement) {
+    // Generate the HTML snippet for the correct element
+    htmlSnippet = `
       <div class="resultsWrapper">
-        <div class="resultCorrect">${result.nazwa}</div>
-        <div class="resultCorrect">${result.rodzaj}</div>
-        <div class="resultCorrect">${result.masaAtomowa}</div>
-        <div class="resultCorrect">${result.rokOdkrycia}</div>
-        <div class="resultCorrect">${result.okres}</div>
-        <div class="resultCorrect">${result.elektroujemnosc}</div>
-        <div class="resultCorrect">${result.wartosciowosc}</div>
+        <div class="resultCorrect">${correctElement.nazwa}</div>
+        <div class="resultCorrect">${correctElement.rodzaj}</div>
+        <div class="resultCorrect">${correctElement.masaAtomowa}</div>
+        <div class="resultCorrect">${correctElement.rokOdkrycia}</div>
+        <div class="resultCorrect">${correctElement.elektroujemnosc}</div>
+        <div class="resultCorrect">${correctElement.okres}</div>
+        <div class="resultCorrect">${correctElement.wartosciowosc.join(
+          ", "
+        )}</div>
       </div>
     `;
-  });
-
-  res.send(htmlSnippet);
+    res.send(htmlSnippet);
+  }
 });
 app.listen(process.env.PORT, () => {
   console.log(`App is listening on http://localhost:${process.env.PORT}`);

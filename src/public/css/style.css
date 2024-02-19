@@ -126,3 +126,9 @@ a:hover{
   height: 64px;
   width: 64px;
 }
+#mainText{
+  background: linear-gradient(to right, var(--box1-color), var(--box2-color), var(--box3-color), var(--box4-color));
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
