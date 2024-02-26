@@ -1,0 +1,9 @@
+.body {
+    background: black;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+a {
+    color: white;
+}

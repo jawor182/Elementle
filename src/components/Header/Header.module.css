@@ -1,0 +1,16 @@
+:root {
+    --bg-color: #312f30;
+    --box1-color: #167d88;
+    --box2-color: #da3933;
+    --box3-color: #fec756;
+    --box4-color: #017129;
+    --header-color: #212020;
+}
+nav a {
+    color: #fff;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+    color: bisque;
+}

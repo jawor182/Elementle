@@ -1,0 +1,23 @@
+:root {
+    --bg-color: #312f30;
+    --box1-color: #167d88;
+    --box2-color: #da3933;
+    --box3-color: #fec756;
+    --box4-color: #017129;
+    --header-color: #212020;
+}
+footer {
+    background-color: var(--header-color);
+    color: #fff;
+    text-align: center;
+    padding: 1vh;
+    height: 1vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#footer-link {
+    text-decoration: underline;
+    font-style: italic;
+    color: inherit;
+}
