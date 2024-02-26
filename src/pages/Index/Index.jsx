@@ -21,7 +21,7 @@ const Index = () => {
                             className={styles.image}
                             src={'images/1-menu-item.png'}
                             alt="Tu bedzie obrazek"
-                        />{' '}
+                        />
                         <div className={styles.text}>Elementle</div>
                     </a>
                     <a href="/znajdowanie" className={styles.box} id="box2">

@@ -4,11 +4,13 @@ import Header from '../../components/Header/Header';
 import styles from './Elementle.module.css';
 const Elementle = () => {
     const [inputValue, setInputValue] = useState('');
-
+    const [userGuess, setUserGuess] = useState(null);
     const ElementleHandler = async (event) => {
         event.preventDefault();
         try {
-            const userGuess = inputValue.match(`/^[A-Za-z0-9!@#$%^&*_-+]+$/`);
+            const regex = new RegExp('^[\\p{L}]+$', 'u');
+            const match = inputValue.match(regex);
+            setUserGuess(match[0]);
             const response = await fetch('http://localhost:3000/elementle', {
                 method: 'POST',
                 headers: {
@@ -17,13 +19,11 @@ const Elementle = () => {
                 body: JSON.stringify({ key: 'value' }),
             });
             const responseData = await response.json();
-            const correctElement = responseData.correctElement;
-            const elementsArray = responseData.elementsArray;
+            const { correctElement, elementsArray } = responseData;
+            console.log('User Guess:', userGuess);
+            console.log('Correct Element:', correctElement.nazwa);
+            console.log('Elements Array:', elementsArray);
             setInputValue('');
-            console.log(correctElement);
-            console.log(userGuess);
-            console.log(elementsArray);
-            return correctElement, elementsArray, userGuess;
         } catch (error) {
             console.error('Error:', error);
         }

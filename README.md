@@ -1,9 +1,7 @@
 # React bo psycha siada
-## Aby odpalic:
-`
-npm install 
-`
+
+## Aby odpalic
+
+`npm install`
 i
-`
-npm run dev
-`
+`npm run dev`
