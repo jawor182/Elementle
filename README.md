@@ -2,5 +2,6 @@
 ## Aby odpalic:
 `
 npm install 
+i
 npm run dev
 `
