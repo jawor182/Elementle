@@ -2,28 +2,36 @@ import { useState } from 'react';
 import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header/Header';
 import styles from './Elementle.module.css';
+import elements from '../../data/elements.js';
+  //TODO 1. Trza zrobic porownywanie wlasciwosci. 2. Trzymanie w jakis sposob danych w pamieci przegladarki. 3. Zablokowanie inputu w przypadku zwyciestwa i moze jakis fajny komunikat
 const Elementle = () => {
     const [inputValue, setInputValue] = useState('');
-    const [userGuess, setUserGuess] = useState(null);
     const ElementleHandler = async (event) => {
         event.preventDefault();
         try {
             const regex = new RegExp('^[\\p{L}]+$', 'u');
             const match = inputValue.match(regex);
-            setUserGuess(match[0]);
-            const response = await fetch('http://localhost:3000/elementle', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ key: 'value' }),
-            });
-            const responseData = await response.json();
-            const { correctElement, elementsArray } = responseData;
-            console.log('User Guess:', userGuess);
-            console.log('Correct Element:', correctElement.nazwa);
-            console.log('Elements Array:', elementsArray);
-            setInputValue('');
+            if (match) {
+                const userGuess = match[0];
+                console.log('userGuess: ' + userGuess);
+                const response = await fetch(
+                    'http://localhost:3000/elementle',
+                    {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ key: 'value' }),
+                    }
+                );
+                const responseData = await response.json();
+                const correctElement = responseData.correctElement;
+                if (elements.some(element => element.nazwa.toLowerCase() === userGuess.toLowerCase())) {
+                    console.log("Exists!")
+                }
+                
+                setInputValue('');
+            }
         } catch (error) {
             console.error('Error:', error);
         }
