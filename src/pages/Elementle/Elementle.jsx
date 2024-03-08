@@ -1,11 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header/Header';
 import styles from './Elementle.module.css';
 import elements from '../../data/elements.js';
-  //TODO 1. Trza zrobic porownywanie wlasciwosci. 2. Trzymanie w jakis sposob danych w pamieci przegladarki. 3. Zablokowanie inputu w przypadku zwyciestwa i moze jakis fajny komunikat
 const Elementle = () => {
     const [inputValue, setInputValue] = useState('');
+    const [guesses,setGuesses] = useState([]);
+    const [disableInput, setDisableInput] = useState(false);
+    useEffect(() => {
+        if(guesses.length > 0){
+        console.log(guesses);
+        }
+    },[guesses] );
     const ElementleHandler = async (event) => {
         event.preventDefault();
         try {
@@ -13,7 +19,6 @@ const Elementle = () => {
             const match = inputValue.match(regex);
             if (match) {
                 const userGuess = match[0];
-                console.log('userGuess: ' + userGuess);
                 const response = await fetch(
                     'http://localhost:3000/elementle',
                     {
@@ -26,10 +31,20 @@ const Elementle = () => {
                 );
                 const responseData = await response.json();
                 const correctElement = responseData.correctElement;
-                if (elements.some(element => element.nazwa.toLowerCase() === userGuess.toLowerCase())) {
-                    console.log("Exists!")
+                if (
+                    elements.some(
+                        (element) =>
+                            element.nazwa.toLowerCase() ===
+                            userGuess.toLowerCase()
+                    )
+                ) {
+                    const userGuessElementArray = elements.filter(
+                        (element) => element.nazwa === userGuess
+                    );
+                    const userGuessElement = userGuessElementArray[0];
+                    setGuesses([...guesses,userGuessElement]);
                 }
-                
+
                 setInputValue('');
             }
         } catch (error) {
@@ -63,6 +78,7 @@ const Elementle = () => {
                             onSubmit={ElementleHandler}
                         >
                             <input
+                                disabled={disableInput}
                                 type="text"
                                 name="element"
                                 className={styles.elementinput}
@@ -76,17 +92,27 @@ const Elementle = () => {
                 </div>
                 <div className={styles.resultsBlock}>
                     <div className={styles.categoriesWrapper}>
-                        {/*
-                <div className={styles.categories}>Nazwa</div>
-                <div className={styles.categories}>Rodzaj</div>
-                <div className={styles.categories}>Masa</div>
-                <div className={styles.categories}>Rok</div>
-                <div className={styles.categories}>Elektroujemność</div>
-                <div className={styles.categories}>Okres</div>
-                <div className={styles.categories}>Wartościowość</div>
-            */}
+                        <div className={styles.categories}>Nazwa</div>
+                        <div className={styles.categories}>Rodzaj</div>
+                        <div className={styles.categories}>Masa</div>
+                        <div className={styles.categories}>Rok</div>
+                        <div className={styles.categories}>Elektroujemność</div>
+                        <div className={styles.categories}>Okres</div>
+                        <div className={styles.categories}>Wartościowość</div>
                     </div>
-                    <div className={styles.resultsBlock}></div>
+                    <div className={styles.resultsBlock}>
+                        {guesses.map((guess,index)=>(
+                            <div className={styles.resultsWrapper} key={index}>
+                                <div>{guess.nazwa}</div>
+                                <div>{guess.rodzaj}</div>
+                                <div>{guess.masaAtomowa}</div>
+                                <div>{guess.rokOdkrycia}</div>
+                                <div>{guess.elektroujemnosc}</div>
+                                <div>{guess.okres}</div>
+                                <div>{guess.wartosciowosc}</div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
             <Footer />
