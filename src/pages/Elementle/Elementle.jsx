@@ -5,13 +5,13 @@ import styles from './Elementle.module.css';
 import elements from '../../data/elements.js';
 const Elementle = () => {
     const [inputValue, setInputValue] = useState('');
-    const [guesses,setGuesses] = useState([]);
+    const [guesses, setGuesses] = useState([]);
     const [disableInput, setDisableInput] = useState(false);
     useEffect(() => {
-        if(guesses.length > 0){
-        console.log(guesses);
+        if (guesses.length > 0) {
+            console.log(guesses);
         }
-    },[guesses] );
+    }, [guesses]);
     const ElementleHandler = async (event) => {
         event.preventDefault();
         try {
@@ -42,7 +42,7 @@ const Elementle = () => {
                         (element) => element.nazwa === userGuess
                     );
                     const userGuessElement = userGuessElementArray[0];
-                    setGuesses([...guesses,userGuessElement]);
+                    setGuesses([...guesses, userGuessElement]);
                 }
 
                 setInputValue('');
@@ -101,9 +101,12 @@ const Elementle = () => {
                         <div className={styles.categories}>Wartościowość</div>
                     </div>
                     <div className={styles.resultsBlock}>
-                        {guesses.map((guess,index)=>(
+                        {guesses.map((guess, index) => (
                             <div className={styles.resultsWrapper} key={index}>
-                                <div /*className={guess.nazwa === correctElement.nazwa ? styles.resultCorrect : styles.resultIncorrect}*/>{guess.nazwa}</div>
+                                <div /*className={guess.nazwa === correctElement.nazwa ? styles.resultCorrect : styles.resultIncorrect}*/
+                                >
+                                    {guess.nazwa}
+                                </div>
                                 <div>{guess.rodzaj}</div>
                                 <div>{guess.masaAtomowa}</div>
                                 <div>{guess.rokOdkrycia}</div>
