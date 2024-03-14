@@ -103,7 +103,7 @@ const Elementle = () => {
                     <div className={styles.resultsBlock}>
                         {guesses.map((guess,index)=>(
                             <div className={styles.resultsWrapper} key={index}>
-                                <div>{guess.nazwa}</div>
+                                <div /*className={guess.nazwa === correctElement.nazwa ? styles.resultCorrect : styles.resultIncorrect}*/>{guess.nazwa}</div>
                                 <div>{guess.rodzaj}</div>
                                 <div>{guess.masaAtomowa}</div>
                                 <div>{guess.rokOdkrycia}</div>
