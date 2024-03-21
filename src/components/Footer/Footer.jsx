@@ -3,9 +3,9 @@ import './Footer.module.css';
 const Footer = () => {
     return (
         <footer>
-            &copy; 2024{' '}
+            &copy;&nbsp;2024&nbsp;
             <a id="footer-link" href="https://github.com/jawor182/Elementle/">
-                Elementle
+                <strong>Elementle</strong>
             </a>
             . Wszelkie prawa zastrzeżone.
         </footer>

@@ -7,11 +7,36 @@ const Elementle = () => {
     const [inputValue, setInputValue] = useState('');
     const [guesses, setGuesses] = useState([]);
     const [disableInput, setDisableInput] = useState(false);
+    const [correctElement, setCorrectElement] = useState(null);
+    const [win, setWin] = useState(false);
     useEffect(() => {
         if (guesses.length > 0) {
-            console.log(guesses);
+           // just be
         }
     }, [guesses]);
+    useEffect(() =>{
+        if(correctElement !== null){
+            setInputValue('');
+        } 
+    },[correctElement]);
+    useEffect(() => {
+        if (win) {
+            setTimeout(()=>{
+                alert("Congrats! You've won today's game! Come back tomorrow for another game!");
+                setDisableInput(true);
+            },100)
+        }
+    }, [win]);
+    useEffect(() => {
+        if (correctElement !== null && guesses !== null && guesses.length > 0) {
+            const userGuessElement = guesses[guesses.length - 1];
+            if (userGuessElement && userGuessElement.nazwa === correctElement.nazwa) {
+                setWin(true);
+            }
+        }
+    }, [correctElement, guesses]);
+    
+    
     const ElementleHandler = async (event) => {
         event.preventDefault();
         try {
@@ -30,27 +55,28 @@ const Elementle = () => {
                     }
                 );
                 const responseData = await response.json();
-                const correctElement = responseData.correctElement;
-                if (
-                    elements.some(
-                        (element) =>
-                            element.nazwa.toLowerCase() ===
-                            userGuess.toLowerCase()
-                    )
-                ) {
-                    const userGuessElementArray = elements.filter(
-                        (element) => element.nazwa === userGuess
-                    );
-                    const userGuessElement = userGuessElementArray[0];
+                setCorrectElement(responseData.correctElement);
+                
+               
+                const userGuessElement = elements.find(
+                    (element) =>
+                        element.nazwa.toLowerCase() ===
+                        userGuess.toLowerCase()
+                );
+    
+                if (userGuessElement) {
                     setGuesses([...guesses, userGuessElement]);
+                    if (userGuessElement.nazwa === correctElement.nazwa) {
+                        setWin(true);
+                    }
                 }
-
-                setInputValue('');
             }
+            setInputValue(''); // Move this line outside of the if statement
         } catch (error) {
             console.error('Error:', error);
         }
     };
+    
     return (
         <>
             <Header />
@@ -98,21 +124,35 @@ const Elementle = () => {
                         <div className={styles.categories}>Rok</div>
                         <div className={styles.categories}>Elektroujemność</div>
                         <div className={styles.categories}>Okres</div>
-                        <div className={styles.categories}>Wartościowość</div>
+                        {/*<div className={styles.categories}>Wartościowość</div>*/}
                     </div>
                     <div className={styles.resultsBlock}>
                         {guesses.map((guess, index) => (
                             <div className={styles.resultsWrapper} key={index}>
-                                <div /*className={guess.nazwa === correctElement.nazwa ? styles.resultCorrect : styles.resultIncorrect}*/
-                                >
+                                <div className={guess.nazwa === correctElement.nazwa ? styles.resultCorrect : styles.resultIncorrect}>
                                     {guess.nazwa}
                                 </div>
-                                <div>{guess.rodzaj}</div>
-                                <div>{guess.masaAtomowa}</div>
-                                <div>{guess.rokOdkrycia}</div>
-                                <div>{guess.elektroujemnosc}</div>
-                                <div>{guess.okres}</div>
-                                <div>{guess.wartosciowosc}</div>
+                                <div className={guess.rodzaj === correctElement.rodzaj ? styles.resultCorrect : styles.resultIncorrect}>
+                                    {guess.rodzaj}
+                                </div>
+                                <div className={guess.masaAtomowa === correctElement.masaAtomowa ? styles.resultCorrect : styles.resultIncorrect}>
+                                    {guess.masaAtomowa}
+                                </div>
+                                <div className={guess.rokOdkrycia === correctElement.rokOdkrycia ? styles.resultCorrect : styles.resultIncorrect}>
+                                    {guess.rokOdkrycia}
+                                </div>
+                                <div className={guess.elektroujemnosc === correctElement.elektroujemnosc ? styles.resultCorrect : styles.resultIncorrect}>
+                                    {guess.elektroujemnosc}
+                                </div>
+                                <div className={guess.okres === correctElement.okres ? styles.resultCorrect : styles.resultIncorrect}>
+                                    {guess.okres}
+                                </div>
+                                {/*<div className={guess.wartosciowosc === correctElement.wartosciowosc ? styles.resultCorrect : styles.resultIncorrect}>
+                                    {/*guess.wartosciowosc.map((value, index) => (
+                                        <span key={index}>{value}{index !== guess.wartosciowosc.length - 1 && ', '}</span>
+                                    ))}
+                                    <div>{guess.wartosciowosc}</div>
+                                </div>*/}
                             </div>
                         ))}
                     </div>
