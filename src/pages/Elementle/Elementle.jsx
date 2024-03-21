@@ -3,6 +3,7 @@ import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header/Header';
 import styles from './Elementle.module.css';
 import elements from '../../data/elements.js';
+import WinScreen from '../../components/WinScreen/WinScreen.jsx';
 const Elementle = () => {
     const [inputValue, setInputValue] = useState('');
     const [guesses, setGuesses] = useState([]);
@@ -22,7 +23,7 @@ const Elementle = () => {
     useEffect(() => {
         if (win) {
             setTimeout(()=>{
-                alert("Congrats! You've won today's game! Come back tomorrow for another game!");
+                //alert("Congrats! You've won today's game! Come back tomorrow for another game!");
                 setDisableInput(true);
             },100)
         }
@@ -80,6 +81,7 @@ const Elementle = () => {
     return (
         <>
             <Header />
+            {win && <WinScreen />}
             <div className={styles.elementle}>
                 <div className={styles.wrapper}>
                     <img

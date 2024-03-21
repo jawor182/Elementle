@@ -38,7 +38,7 @@ const Index = () => {
                             src="images/3-menu-item.png"
                             alt="Tu bedzie obrazek"
                         />
-                        <div className={styles.text}>Uzupelnianie</div>
+                        <div className={styles.text}>Uzupełnianie</div>
                     </a>
                     <a href="/wlasciwosci" className={styles.box} id="box4">
                         <img
