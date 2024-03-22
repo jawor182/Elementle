@@ -10,6 +10,26 @@ const Elementle = () => {
     const [disableInput, setDisableInput] = useState(false);
     const [correctElement, setCorrectElement] = useState(null);
     const [win, setWin] = useState(false);
+
+    useEffect(()=>{
+            localStorage.setItem(
+                "elementleData",
+                JSON.stringify({
+                    guesses,win,correctElement,inputValue
+                })
+            );
+    },[guesses, win, correctElement, inputValue]);
+    
+    useEffect(()=>{
+        const storedData = localStorage.getItem("elementleData");
+        if(storedData){
+            const parsedData = JSON.parse(storedData);
+            setGuesses(parsedData.guesses);
+            setWin(parsedData.win);
+            setCorrectElement(parsedData.correctElement);
+            setInputValue(parsedData.inputValue)
+        }
+    },[]);
     useEffect(() => {
         if (guesses.length > 0) {
            // just be
@@ -67,9 +87,7 @@ const Elementle = () => {
     
                 if (userGuessElement) {
                     setGuesses([...guesses, userGuessElement]);
-                    if (userGuessElement.nazwa === correctElement.nazwa) {
                         setWin(true);
-                    }
                 }
             }
             setInputValue(''); // Move this line outside of the if statement
