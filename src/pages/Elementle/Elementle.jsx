@@ -10,8 +10,8 @@ const Elementle = () => {
     const [disableInput, setDisableInput] = useState(false);
     const [correctElement, setCorrectElement] = useState(null);
     const [win, setWin] = useState(false);
+    const [oldDate,setOldDate] = useState(null);
     const currentDate = new Date().toDateString();
-    let date;
     console.log(currentDate);
     
     useEffect(()=>{
@@ -31,14 +31,14 @@ const Elementle = () => {
             setWin(parsedData.win);
             setCorrectElement(parsedData.correctElement);
             setInputValue(parsedData.inputValue)
-            date = parsedData.currentDate
-            if(currentDate !== date ){
+            setOldDate(parsedData.currentDate);
+            if(currentDate !== oldDate ){
                 setDisableInput(false);
                 localStorage.clear();
             }
 
         }
-    },[]);
+    },[currentDate,oldDate]);
     useEffect(() => {
         if (guesses.length > 0) {
            // just be
