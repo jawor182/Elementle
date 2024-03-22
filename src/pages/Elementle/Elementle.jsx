@@ -10,15 +10,18 @@ const Elementle = () => {
     const [disableInput, setDisableInput] = useState(false);
     const [correctElement, setCorrectElement] = useState(null);
     const [win, setWin] = useState(false);
-
+    const currentDate = new Date().toDateString();
+    let date;
+    console.log(currentDate);
+    
     useEffect(()=>{
             localStorage.setItem(
                 "elementleData",
                 JSON.stringify({
-                    guesses,win,correctElement,inputValue
+                    guesses,win,correctElement,inputValue,currentDate
                 })
             );
-    },[guesses, win, correctElement, inputValue]);
+    },[guesses, win, correctElement, inputValue,currentDate]);
     
     useEffect(()=>{
         const storedData = localStorage.getItem("elementleData");
@@ -28,6 +31,12 @@ const Elementle = () => {
             setWin(parsedData.win);
             setCorrectElement(parsedData.correctElement);
             setInputValue(parsedData.inputValue)
+            date = parsedData.currentDate
+            if(currentDate !== date ){
+                setDisableInput(false);
+                localStorage.clear();
+            }
+
         }
     },[]);
     useEffect(() => {
