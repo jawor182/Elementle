@@ -5,14 +5,16 @@ import styles from './Elementle.module.css';
 import elements from '../../data/elements.js';
 import WinScreen from '../../components/WinScreen/WinScreen.jsx';
 const Elementle = () => {
-    const [inputValue, setInputValue] = useState('');
-    const [guesses, setGuesses] = useState([]);
-    const [disableInput, setDisableInput] = useState(false);
-    const [correctElement, setCorrectElement] = useState(null);
-    const [win, setWin] = useState(false);
-    const [oldDate,setOldDate] = useState(null);
     const currentDate = new Date().toDateString();
-    console.log(currentDate);
+    const storedData = localStorage.getItem("elementleData");
+    const initialData = storedData ? JSON.parse(storedData) : { guesses: [], win: false, correctElement: null, inputValue: '', currentDate: currentDate,disableInput: false };
+
+    const [inputValue,setInputValue] = useState(initialData.inputValue);
+    const [guesses, setGuesses] = useState(initialData.guesses);
+    const [disableInput, setDisableInput] = useState(initialData.disableInput);
+    const [correctElement,setCorrectElement] = useState(initialData.correctElement);
+    const [win,setWin] = useState(initialData.win)
+    const [oldDate, setOldDate] = useState(initialData.currentDate);
     
     useEffect(()=>{
             localStorage.setItem(

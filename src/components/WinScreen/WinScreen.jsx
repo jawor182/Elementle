@@ -8,17 +8,17 @@ const WinScreen = () => {
     },
     game2:{
       name:"Znajdowanie",
-      link:"http://localhost:5137/znajdowanie",
+      link:"http://localhost:5173/znajdowanie",
       icon: "images/2-menu-item.png"
     },
     game3:{
       name:"Uzupełnianie",
-      link:"http://localhost:5137/uzupelnianie",
+      link:"http://localhost:5173/uzupelnianie",
       icon: "images/3-menu-item.png"
     },
     game4:{
       name:"Właściwości",
-      link:"http://localhost:5137/wlasciwosci",
+      link:"http://localhost:5173/wlasciwosci",
       icon: "images/4-menu-item.png"
     }
   }
