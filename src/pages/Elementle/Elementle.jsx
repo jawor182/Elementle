@@ -17,6 +17,12 @@ const Elementle = () => {
     const [oldDate, setOldDate] = useState(initialData.currentDate);
     
     useEffect(()=>{
+        if(currentDate !== oldDate){
+            localStorage.removeItem("elementleData");
+        }
+    },[currentDate,oldDate])
+
+    useEffect(()=>{
             localStorage.setItem(
                 "elementleData",
                 JSON.stringify({
