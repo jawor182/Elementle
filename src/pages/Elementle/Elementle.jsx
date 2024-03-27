@@ -17,10 +17,10 @@ const Elementle = () => {
     const [oldDate, setOldDate] = useState(initialData.currentDate);
     
     useEffect(()=>{
-        if(currentDate !== oldDate){
-            localStorage.removeItem("elementleData");
+        if(initialData.currentDate !== oldDate){
+            localStorage.clear();
         }
-    },[currentDate,oldDate])
+    },)
 
     useEffect(()=>{
             localStorage.setItem(
@@ -31,22 +31,22 @@ const Elementle = () => {
             );
     },[guesses, win, correctElement, inputValue,currentDate]);
     
-    useEffect(()=>{
+    useEffect(() => {
         const storedData = localStorage.getItem("elementleData");
-        if(storedData){
+        if (storedData) {
             const parsedData = JSON.parse(storedData);
             setGuesses(parsedData.guesses);
             setWin(parsedData.win);
             setCorrectElement(parsedData.correctElement);
             setInputValue(parsedData.inputValue)
-            setOldDate(parsedData.currentDate);
-            if(currentDate !== oldDate ){
+            // Update oldDate only if it's not already set
+            setOldDate(oldDate => oldDate || parsedData.currentDate);
+            if (currentDate !== oldDate) {
                 setDisableInput(false);
                 localStorage.clear();
             }
-
         }
-    },[currentDate,oldDate]);
+    }, [currentDate, oldDate]);
     useEffect(() => {
         if (guesses.length > 0) {
            // just be
