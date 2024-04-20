@@ -1,0 +1,41 @@
+:root {
+    --bg-color: #312f30;
+    --box1-color: #167d88;
+    --box2-color: #da3933;
+    --box3-color: #fec756;
+    --box4-color: #017129;
+    --header-color: #212020;
+}
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+}
+nav {
+    display: flex;
+    justify-content: space-around;
+    background-color: var(--header-color);
+    padding: 2vh;
+    height: 2vh;
+    align-items: center;
+}
+#footer-link {
+    text-decoration: underline;
+    font-style: italic;
+    color: inherit;
+}
+#box1 {
+    background-color: var(--box1-color);
+}
+#box2 {
+    background-color: var(--box2-color);
+}
+#box3 {
+    background-color: var(--box3-color);
+}
+#box4 {
+    background-color: var(--box4-color);
+}

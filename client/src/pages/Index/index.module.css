@@ -1,0 +1,107 @@
+:root {
+    --bg-color: #312f30;
+    --box1-color: #167d88;
+    --box2-color: #da3933;
+    --box3-color: #fec756;
+    --box4-color: #017129;
+    --header-color: #212020;
+}
+.body {
+    font-family: 'Roboto', sans-serif;
+    background-image: url('../images/bg.png');
+    background-color: var(--bg-color);
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 91vh;
+}
+.main {
+    text-align: center;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Wyśrodkuj zawartość w pionie */
+    padding: 1rem;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+}
+.mainText {
+    background: linear-gradient(
+        to right,
+        var(--box1-color),
+        var(--box2-color),
+        var(--box3-color),
+        var(--box4-color)
+    );
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+    font-size: 5rem;
+}
+#box1 {
+    background-color: var(--box1-color);
+}
+#box2 {
+    background-color: var(--box2-color);
+}
+#box3 {
+    background-color: var(--box3-color);
+}
+#box4 {
+    background-color: var(--box4-color);
+}
+.box {
+    width: 25vw;
+    min-width: 350px;
+    height: 12vh;
+    background-color: var(--box-color);
+    margin: 1rem;
+    cursor: pointer;
+    transition: transform 0.3s;
+    border: 0.3rem solid black;
+    font-size: 2.75rem;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    align-items: center;
+    justify-items: center;
+    border-radius: 15px;
+    color: inherit;
+    text-decoration: none;
+}
+.box:hover {
+    transform: scale(1.1);
+    text-decoration: none;
+}
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+}
+.img {
+    width: 5rem;
+    height: 6rem;
+}
+.text {
+    min-width: 250px;
+    text-align: start;
+}
+#footer-link {
+    text-decoration: underline;
+    font-style: italic;
+    color: inherit;
+}
+.image {
+    height: 64px;
+    width: 64px;
+}
