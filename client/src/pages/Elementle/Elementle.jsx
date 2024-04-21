@@ -5,22 +5,22 @@ import styles from './Elementle.module.css';
 import elements from '../../data/elements.js';
 import WinScreen from '../../components/WinScreen/WinScreen.jsx';
 const Elementle = () => {
-    const currentDate = new Date().toDateString();
-    const storedData = localStorage.getItem("elementleData");
-    const initialData = storedData ? JSON.parse(storedData) : { guesses: [], win: false, correctElement: null, inputValue: '', currentDate: currentDate,disableInput: false };
-
-    const [inputValue,setInputValue] = useState(initialData.inputValue);
-    const [guesses, setGuesses] = useState(initialData.guesses);
-    const [disableInput, setDisableInput] = useState(initialData.disableInput);
-    const [correctElement,setCorrectElement] = useState(initialData.correctElement);
-    const [win,setWin] = useState(initialData.win)
-    const [oldDate, setOldDate] = useState(initialData.currentDate);
+//    const currentDate = new Date().toDateString();
+//  const storedData = localStorage.getItem("elementleData");
+//    const initialData = storedData ? JSON.parse(storedData) : { guesses: [], win: false, correctElement: null, inputValue: '', currentDate: currentDate,disableInput: false };
+    localStorage.clear();
+    const [inputValue,setInputValue] = useState('');
+    const [guesses, setGuesses] = useState([]);
+    const [disableInput, setDisableInput] = useState(false);
+    const [correctElement,setCorrectElement] = useState(0);
+    const [win,setWin] = useState(false)
+//    const [oldDate, setOldDate] = useState(initialData.currentDate);
     
-    useEffect(()=>{
+    /*useEffect(()=>{
         if(initialData.currentDate !== oldDate){
             localStorage.clear();
         }
-    },)
+    },) 
 
     useEffect(()=>{
             localStorage.setItem(
@@ -47,9 +47,11 @@ const Elementle = () => {
             }
         }
     }, [currentDate, oldDate]);
+    */
     useEffect(() => {
         if (guesses.length > 0) {
            // just be
+         //  console.log(guesses)
         }
     }, [guesses]);
     useEffect(() =>{
@@ -65,14 +67,14 @@ const Elementle = () => {
             },100)
         }
     }, [win]);
-    useEffect(() => {
+    /*useEffect(() => {
         if (correctElement !== null && guesses !== null && guesses.length > 0) {
             const userGuessElement = guesses[guesses.length - 1];
             if (userGuessElement && userGuessElement.nazwa === correctElement.nazwa) {
                 setWin(true);
             }
         }
-    }, [correctElement, guesses]);
+    }, [correctElement, guesses]); */
     
     
     const ElementleHandler = async (event) => {
@@ -94,17 +96,18 @@ const Elementle = () => {
                 );
                 const responseData = await response.json();
                 setCorrectElement(responseData.correctElement);
-                
                
                 const userGuessElement = elements.find(
                     (element) =>
                         element.nazwa.toLowerCase() ===
                         userGuess.toLowerCase()
                 );
-    
+                console.log(userGuessElement)
                 if (userGuessElement) {
-                    setGuesses([...guesses, userGuessElement]);
+                    if(userGuessElement.nazwa === correctElement.nazwa){
                         setWin(true);
+                       }
+                       setGuesses([...guesses, userGuessElement]);
                 }
             }
             setInputValue(''); // Move this line outside of the if statement
