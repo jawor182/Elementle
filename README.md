@@ -1,3 +1,12 @@
 # Wersja demo elementle
 
-## `npm run dev` aby uruchomic
+Komendy
+
+---
+cd <folder> && npm i (by zainstalowac)
+
+
+cd <folder> && npm run dev (by uruchomic)
+
+
+---
