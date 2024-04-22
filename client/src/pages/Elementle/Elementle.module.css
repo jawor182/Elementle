@@ -26,7 +26,7 @@
     align-items: center;
     padding: 1rem;
     font-family: 'Roboto', sans-serif;
-    background-image: url('../images/bg.png'); 
+    background-image: url('../images/bg.png');
     background-color: var(--bg-color);
     background-size: cover;
     background-attachment: fixed;
@@ -83,7 +83,7 @@
 }
 .categoriesWrapper {
     display: grid;
-    grid-template-columns: 1fr  1fr  1fr  1fr  1fr  1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     justify-items: center;
     margin-top: 50px;
 }

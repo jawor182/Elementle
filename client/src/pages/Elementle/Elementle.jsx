@@ -4,79 +4,80 @@ import Header from '../../components/Header/Header';
 import styles from './Elementle.module.css';
 import elements from '../../data/elements.js';
 import WinScreen from '../../components/WinScreen/WinScreen.jsx';
+import useLocalStorage from 'use-local-storage';
 const Elementle = () => {
-//    const currentDate = new Date().toDateString();
-//  const storedData = localStorage.getItem("elementleData");
-//    const initialData = storedData ? JSON.parse(storedData) : { guesses: [], win: false, correctElement: null, inputValue: '', currentDate: currentDate,disableInput: false };
-    localStorage.clear();
-    const [inputValue,setInputValue] = useState('');
+    const currentDate = new Date().getUTCDate();
+    const [inputValue, setInputValue] = useState('');
     const [guesses, setGuesses] = useState([]);
     const [disableInput, setDisableInput] = useState(false);
-    const [correctElement,setCorrectElement] = useState(0);
-    const [win,setWin] = useState(false)
-//    const [oldDate, setOldDate] = useState(initialData.currentDate);
-    
-    /*useEffect(()=>{
-        if(initialData.currentDate !== oldDate){
-            localStorage.clear();
-        }
-    },) 
+    const [correctElement, setCorrectElement] = useState(0);
+    const [win, setWin] = useState(false);
+    // Definiowanie zmiennych do lokalnej pamięci
 
-    useEffect(()=>{
-            localStorage.setItem(
-                "elementleData",
-                JSON.stringify({
-                    guesses,win,correctElement,inputValue,currentDate
-                })
-            );
-    },[guesses, win, correctElement, inputValue,currentDate]);
-    
+    const [localGuesses, setLocalGuesses] = useLocalStorage('guesses');
+    const [localDisableInput, setLocalDisableInput] = useLocalStorage('disableInput');
+    const [localCorrectElement, setLocalCorrectElement] = useLocalStorage('correctElement');
+    const [localWin, setLocalWin] = useLocalStorage('win');
+    const [localCurrentDate, setLocalCurrentDate] = useLocalStorage('currentDate');
     useEffect(() => {
-        const storedData = localStorage.getItem("elementleData");
-        if (storedData) {
-            const parsedData = JSON.parse(storedData);
-            setGuesses(parsedData.guesses);
-            setWin(parsedData.win);
-            setCorrectElement(parsedData.correctElement);
-            setInputValue(parsedData.inputValue)
-            // Update oldDate only if it's not already set
-            setOldDate(oldDate => oldDate || parsedData.currentDate);
-            if (currentDate !== oldDate) {
-                setDisableInput(false);
-                localStorage.clear();
+        if (localStorage !== null) {
+            if (localStorage.getItem('currentDate') !== null) {
+                if (
+                    localStorage.getItem('currentDate').valueOf !== currentDate
+                ) {
+                    localStorage.clear();
+                }
             }
         }
-    }, [currentDate, oldDate]);
-    */
+    });
     useEffect(() => {
         if (guesses.length > 0) {
-           // just be
-         //  console.log(guesses)
+            // just be
+            //  console.log(guesses)
         }
     }, [guesses]);
-    useEffect(() =>{
-        if(correctElement !== null){
+    useEffect(() => {
+        if (correctElement !== null) {
             setInputValue('');
-        } 
-    },[correctElement]);
+        }
+    }, [correctElement]);
     useEffect(() => {
         if (win) {
-            setTimeout(()=>{
+            setTimeout(() => {
                 //alert("Congrats! You've won today's game! Come back tomorrow for another game!");
                 setDisableInput(true);
-            },100)
+            }, 100);
         }
     }, [win]);
-    /*useEffect(() => {
+    useEffect(() => {
         if (correctElement !== null && guesses !== null && guesses.length > 0) {
             const userGuessElement = guesses[guesses.length - 1];
-            if (userGuessElement && userGuessElement.nazwa === correctElement.nazwa) {
+            if (
+                userGuessElement &&
+                userGuessElement.nazwa === correctElement.nazwa
+            ) {
                 setWin(true);
+                setLocalGuesses(guesses);
+                setLocalDisableInput(disableInput);
+                setLocalCorrectElement(correctElement);
+                setLocalCurrentDate(currentDate);
+                setLocalWin(win);
+                console.log(localStorage);
             }
         }
-    }, [correctElement, guesses]); */
-    
-    
+    }, [
+        correctElement,
+        guesses,
+        currentDate,
+        disableInput,
+        setLocalCorrectElement,
+        setLocalCurrentDate,
+        setLocalDisableInput,
+        setLocalGuesses,
+        setLocalWin,
+        win,
+    ]);
+
     const ElementleHandler = async (event) => {
         event.preventDefault();
         try {
@@ -96,18 +97,17 @@ const Elementle = () => {
                 );
                 const responseData = await response.json();
                 setCorrectElement(responseData.correctElement);
-               
+
                 const userGuessElement = elements.find(
                     (element) =>
-                        element.nazwa.toLowerCase() ===
-                        userGuess.toLowerCase()
+                        element.nazwa.toLowerCase() === userGuess.toLowerCase()
                 );
-                console.log(userGuessElement)
+                console.log(userGuessElement);
                 if (userGuessElement) {
-                    if(userGuessElement.nazwa === correctElement.nazwa){
+                    if (userGuessElement.nazwa === correctElement.nazwa) {
                         setWin(true);
-                       }
-                       setGuesses([...guesses, userGuessElement]);
+                    }
+                    setGuesses([...guesses, userGuessElement]);
                 }
             }
             setInputValue(''); // Move this line outside of the if statement
@@ -115,7 +115,7 @@ const Elementle = () => {
             console.error('Error:', error);
         }
     };
-    
+
     return (
         <>
             <Header />
@@ -169,22 +169,61 @@ const Elementle = () => {
                     <div className={styles.resultsBlock}>
                         {guesses.map((guess, index) => (
                             <div className={styles.resultsWrapper} key={index}>
-                                <div className={guess.nazwa === correctElement.nazwa ? styles.resultCorrect : styles.resultIncorrect}>
+                                <div
+                                    className={
+                                        guess.nazwa === correctElement.nazwa
+                                            ? styles.resultCorrect
+                                            : styles.resultIncorrect
+                                    }
+                                >
                                     {guess.nazwa}
                                 </div>
-                                <div className={guess.rodzaj === correctElement.rodzaj ? styles.resultCorrect : styles.resultIncorrect}>
+                                <div
+                                    className={
+                                        guess.rodzaj === correctElement.rodzaj
+                                            ? styles.resultCorrect
+                                            : styles.resultIncorrect
+                                    }
+                                >
                                     {guess.rodzaj}
                                 </div>
-                                <div className={guess.masaAtomowa === correctElement.masaAtomowa ? styles.resultCorrect : styles.resultIncorrect}>
+                                <div
+                                    className={
+                                        guess.masaAtomowa ===
+                                            correctElement.masaAtomowa
+                                            ? styles.resultCorrect
+                                            : styles.resultIncorrect
+                                    }
+                                >
                                     {guess.masaAtomowa}
                                 </div>
-                                <div className={guess.rokOdkrycia === correctElement.rokOdkrycia ? styles.resultCorrect : styles.resultIncorrect}>
+                                <div
+                                    className={
+                                        guess.rokOdkrycia ===
+                                            correctElement.rokOdkrycia
+                                            ? styles.resultCorrect
+                                            : styles.resultIncorrect
+                                    }
+                                >
                                     {guess.rokOdkrycia}
                                 </div>
-                                <div className={guess.elektroujemnosc === correctElement.elektroujemnosc ? styles.resultCorrect : styles.resultIncorrect}>
+                                <div
+                                    className={
+                                        guess.elektroujemnosc ===
+                                            correctElement.elektroujemnosc
+                                            ? styles.resultCorrect
+                                            : styles.resultIncorrect
+                                    }
+                                >
                                     {guess.elektroujemnosc}
                                 </div>
-                                <div className={guess.okres === correctElement.okres ? styles.resultCorrect : styles.resultIncorrect}>
+                                <div
+                                    className={
+                                        guess.okres === correctElement.okres
+                                            ? styles.resultCorrect
+                                            : styles.resultIncorrect
+                                    }
+                                >
                                     {guess.okres}
                                 </div>
                                 {/*<div className={guess.wartosciowosc === correctElement.wartosciowosc ? styles.resultCorrect : styles.resultIncorrect}>
