@@ -5,6 +5,7 @@ import styles from './Elementle.module.css';
 import elements from '../../data/elements.js';
 import WinScreen from '../../components/WinScreen/WinScreen.jsx';
 import useLocalStorage from 'use-local-storage';
+
 const Elementle = () => {
     const currentDate = new Date().getUTCDate();
     const [inputValue, setInputValue] = useState('');
@@ -12,72 +13,81 @@ const Elementle = () => {
     const [disableInput, setDisableInput] = useState(false);
     const [correctElement, setCorrectElement] = useState(0);
     const [win, setWin] = useState(false);
-    // Definiowanie zmiennych do lokalnej pamięci
 
-    const [localGuesses, setLocalGuesses] = useLocalStorage('guesses');
+    // Definiowanie zmiennych do lokalnej pamięci
+    const [localGuesses, setLocalGuesses] = useLocalStorage('guesses', []);
     const [localDisableInput, setLocalDisableInput] = useLocalStorage('disableInput');
-    const [localCorrectElement, setLocalCorrectElement] = useLocalStorage('correctElement');
-    const [localWin, setLocalWin] = useLocalStorage('win');
-    const [localCurrentDate, setLocalCurrentDate] = useLocalStorage('currentDate');
+    const [localCorrectElement, setLocalCorrectElement] = useLocalStorage('correctElement', 0);
+    const [localWin, setLocalWin] = useLocalStorage('win', false);
+    const [localCurrentDate, setLocalCurrentDate] = useLocalStorage('currentDate', currentDate);
+
     useEffect(() => {
-        if (localStorage !== null) {
-            if (localStorage.getItem('currentDate') !== null) {
-                if (
-                    localStorage.getItem('currentDate').valueOf !== currentDate
-                ) {
-                    localStorage.clear();
-                }
-            }
+        // Check if local storage values exist
+        if (localCurrentDate !== null) {
+            // Assign local values to state variables
+            setGuesses(localGuesses);
+            setDisableInput(localDisableInput);
+            setCorrectElement(localCorrectElement);
+            setWin(localWin);
+        } else {
+            // Initialize local storage with default values
+            setLocalGuesses([]);
+            setLocalDisableInput(false);
+            setLocalCorrectElement(0);
+            setLocalWin(false);
+            setLocalCurrentDate(currentDate);
         }
-    });
+    }, [localCurrentDate, localGuesses, localDisableInput, localCorrectElement, localWin]);
+    
+
+    useEffect(() => {
+        // Check if the local storage values are different from defaults
+        if (localCurrentDate !== currentDate || localStorage == null) {
+            // Update local storage with defaults
+            setLocalGuesses([]);
+            setLocalDisableInput(false);
+            setLocalCorrectElement(0);
+            setLocalWin(false);
+            setLocalCurrentDate(currentDate);
+        } else {
+            // Assign local values to state variables
+            setGuesses(localGuesses);
+            setDisableInput(localDisableInput);
+            setCorrectElement(localCorrectElement);
+            setWin(localWin);
+        }
+    },[localCurrentDate, currentDate, setLocalGuesses, setLocalDisableInput, setLocalCorrectElement, setLocalWin, setLocalCurrentDate, localGuesses, localDisableInput, localCorrectElement, localWin] );
+
     useEffect(() => {
         if (guesses.length > 0) {
             // just be
             //  console.log(guesses)
+            console.log("Guesses type:", typeof guesses);
+            console.log("Guesses value:", guesses);
+
         }
     }, [guesses]);
+
+   useEffect(()=>{
+    if(win){
+        setDisableInput(true);
+        setLocalCorrectElement(correctElement);
+        setLocalCurrentDate(currentDate);
+        setLocalDisableInput(disableInput);
+        setLocalGuesses(guesses);
+        setLocalWin(win);
+       // console.log(localStorage)
+    }
+   },[win, setLocalCorrectElement, correctElement, setLocalCurrentDate, currentDate, setLocalDisableInput, disableInput, setLocalGuesses, guesses, setLocalWin])
+
     useEffect(() => {
         if (correctElement !== null) {
             setInputValue('');
         }
     }, [correctElement]);
-    useEffect(() => {
-        if (win) {
-            setTimeout(() => {
-                //alert("Congrats! You've won today's game! Come back tomorrow for another game!");
-                setDisableInput(true);
-            }, 100);
-        }
-    }, [win]);
-    useEffect(() => {
-        if (correctElement !== null && guesses !== null && guesses.length > 0) {
-            const userGuessElement = guesses[guesses.length - 1];
-            if (
-                userGuessElement &&
-                userGuessElement.nazwa === correctElement.nazwa
-            ) {
-                setWin(true);
-                setLocalGuesses(guesses);
-                setLocalDisableInput(disableInput);
-                setLocalCorrectElement(correctElement);
-                setLocalCurrentDate(currentDate);
-                setLocalWin(win);
-                console.log(localStorage);
-            }
-        }
-    }, [
-        correctElement,
-        guesses,
-        currentDate,
-        disableInput,
-        setLocalCorrectElement,
-        setLocalCurrentDate,
-        setLocalDisableInput,
-        setLocalGuesses,
-        setLocalWin,
-        win,
-    ]);
-
+    //console.log("Guesses type:", typeof guesses);
+    //console.log("Guesses value:", guesses);
+    
     const ElementleHandler = async (event) => {
         event.preventDefault();
         try {
@@ -102,7 +112,6 @@ const Elementle = () => {
                     (element) =>
                         element.nazwa.toLowerCase() === userGuess.toLowerCase()
                 );
-                console.log(userGuessElement);
                 if (userGuessElement) {
                     if (userGuessElement.nazwa === correctElement.nazwa) {
                         setWin(true);
@@ -110,7 +119,7 @@ const Elementle = () => {
                     setGuesses([...guesses, userGuessElement]);
                 }
             }
-            setInputValue(''); // Move this line outside of the if statement
+            setInputValue('');
         } catch (error) {
             console.error('Error:', error);
         }
@@ -164,10 +173,10 @@ const Elementle = () => {
                         <div className={styles.categories}>Rok</div>
                         <div className={styles.categories}>Elektroujemność</div>
                         <div className={styles.categories}>Okres</div>
-                        {/*<div className={styles.categories}>Wartościowość</div>*/}
                     </div>
                     <div className={styles.resultsBlock}>
-                        {guesses.map((guess, index) => (
+                        
+                    {guesses.map((guess, index) => (
                             <div className={styles.resultsWrapper} key={index}>
                                 <div
                                     className={
@@ -226,14 +235,9 @@ const Elementle = () => {
                                 >
                                     {guess.okres}
                                 </div>
-                                {/*<div className={guess.wartosciowosc === correctElement.wartosciowosc ? styles.resultCorrect : styles.resultIncorrect}>
-                                    {/*guess.wartosciowosc.map((value, index) => (
-                                        <span key={index}>{value}{index !== guess.wartosciowosc.length - 1 && ', '}</span>
-                                    ))}
-                                    <div>{guess.wartosciowosc}</div>
-                                </div>*/}
                             </div>
                         ))}
+                    
                     </div>
                 </div>
             </div>
