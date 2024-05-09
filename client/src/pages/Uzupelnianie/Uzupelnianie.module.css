@@ -1,0 +1,114 @@
+/* Styl CSS dla gry */
+
+:root {
+    --background-image: url('../images/bg.png'); /* Obrazek tła */
+    --theme: #017129; /* Kolor motywu */
+    --img-size: 90px; /* Rozmiar obrazka */
+    --result-size: 90px; /* Rozmiar wyniku */
+    --game-width: 840px; /* Szerokość gry */
+    
+}
+
+.gameContainer {
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    background-image: var(--background-image);
+    background-color: var(--bg-color);
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 91vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.gameContainer .header {
+    font-size: calc(100% + 40px); 
+    background: linear-gradient(to right, yellow, green); /* Dodanie gradientu */
+    -webkit-background-clip: text; /* Ustawienie clipu tła */
+    background-clip: text; /* Ustawienie clipu tła */
+    color: transparent; /* Ustawienie koloru tekstu na transparentny */
+}
+
+
+.gameContainer p {
+    font-size: calc(100% + 20px); /* Zwiększenie rozmiaru o 20px */
+}
+
+input[type="text"] {
+    width: 300px;
+    height: 40px;
+    font-size: 120%; /* Zwiększenie rozmiaru pola do wpisywania o 20% */
+    margin-right: 10px;
+    padding: 5px;
+}
+
+
+
+
+
+.reaction {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.reaction span {
+    font-size: 1.2em;
+}
+
+input[type="text"] {
+    width: 300px;
+    height: 40px;
+    font-size: 1em;
+    margin-right: 10px;
+    padding: 5px;
+}
+
+button[type="submit"] {
+    height: 40px;
+    font-size: 1em;
+    background-color: var(--theme); /* Kolor przycisku */
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #015526;
+}
+
+.correct {
+    color: green;
+}
+
+.incorrect {
+    color: red;
+}
+
+.reactionDescription {
+    display: flex;
+    justify-content: space-between;
+    margin-top: -5px;
+    margin-bottom: 80px;
+}
+
+.reactionBlock {
+    flex: 1;
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 5px;
+    margin-right: 30px;
+    color: black; 
+}
+
+.reactionName {
+    font-weight: bold; 
+}
+
+.reactionBlock:last-child {
+    margin-right: 0; /* Usunięcie marginesu po prawej stronie ostatniego bloku */
+}
+
