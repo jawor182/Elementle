@@ -1,6 +1,6 @@
 import Header from "../../components/Header/Header"
 import Footer from "../../components/Footer/Footer"
-import styles from "./O_nas.module.css"
+import styles from "./o_nas.module.css"
 const O_nas = () => {
   return (
     <>
