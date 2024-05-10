@@ -36,6 +36,6 @@ app.post("/elementle", (req, res) => {
   res.json({correctElement});
 });
 
-app.listen(process.env.PORT, () => {
-  console.log(`App is listening on http://localhost:${process.env.PORT}`);
+app.listen(3000, () => {
+  console.log(`App is listening on http://localhost:3000`);
 });
