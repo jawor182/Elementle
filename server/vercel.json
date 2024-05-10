@@ -1,10 +1,8 @@
 {
-    "version": 2,
-    "routes": [
-      {
-        "src": "/elementle",
-        "dest": "/server/index.js"
-      }
-    ]
-  }
-  
+    "version" : 2,
+    "builds" :[{
+        "src" : "./index.js",
+        "use" : "@vercel/node"
+    }],
+    "routes" : [{"src" : "/(.*)", "dest" :"/elementle"}]
+}
