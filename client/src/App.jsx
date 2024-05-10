@@ -7,6 +7,7 @@ import O_nas from './pages/O_nas/O_nas';
 import Ranking from "./pages/Ranking/Ranking"
 import Ustawienia from "./pages/Ustawienia/Ustawienia"
 import Profil from "./pages/Profil/Profil"
+//
 function App() {
     const router = createBrowserRouter([
         {
