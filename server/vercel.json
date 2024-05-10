@@ -5,9 +5,6 @@
         "src": "/elementle",
         "dest": "/server/index.js"
       }
-    ],
-    "env": {
-      "PORT": 3000
-    }
+    ]
   }
   
