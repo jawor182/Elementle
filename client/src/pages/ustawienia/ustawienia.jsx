@@ -1,5 +1,4 @@
-import React from 'react'
-import Construction from '../Construction/Construction'
+import Construction from '../../components//Construction/Construction'
 
 const Ustawienia = () => {
   return (
