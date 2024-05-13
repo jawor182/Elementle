@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Index from './pages/Index/Index';
 import NotFound from './pages/NotFound/NotFound';
+import Znajdowanie from './pages/Znajdowanie/Znajdowanie';
 import Uzupelnianie from './pages/Uzupelnianie/Uzupelnianie';
 import Elementle from './pages/Elementle/Elementle';
 import Ranking from "./pages/ranking/ranking"
@@ -24,6 +25,10 @@ function App() {
         {
             path: '/uzupelnianie',
             element: <Uzupelnianie />,
+        },
+        {
+            path: '/znajdowanie',
+            element: <Znajdowanie/>
         },
         {
             path:"/o_nas",
