@@ -1,0 +1,82 @@
+:root {
+    --theme: #017129;
+    --img-size: 90px;
+    --result-size: 90px;
+    --game-width: 840px;
+}
+.elementle {
+    text-align: center;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    font-family: 'Roboto', sans-serif;
+    background-image: url('../images/bg.png');
+    background-color: var(--bg-color);
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    min-height: 87.5vh;
+}
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+}
+.mainText {
+    background: linear-gradient(
+        to right,
+        var(--box1-color),
+        var(--box2-color),
+        var(--box3-color),
+        var(--box4-color)
+    );
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+    font-size: 5rem;
+}
+.img {
+    width: 5rem;
+    height: 6rem;
+}
+.mainBlock {
+    width: var(--game-width);
+    height: 300px;
+    background-color: var(--theme);
+    border-radius: 10px;
+    box-shadow:
+        0 4px 8px 0 rgba(0, 0, 0, 0.2),
+        0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    display: grid;
+    grid-template-rows: 3fr 1.5fr;
+    justify-items: center;
+}
+.gameText{
+    margin-top: 1rem;
+    font-size: 2rem;
+    text-align: center;
+}
+.formWrapper{
+    width: 100%;
+    margin-top: 2rem;
+}
+.elementInput{
+    width: 75%;
+    height: 50px;
+    font-size: xx-large;
+}
+.resultsWrapper{
+    margin-top: 2rem ;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+.resultsText{
+    text-align: left;
+    margin-left: 5%;
+}
