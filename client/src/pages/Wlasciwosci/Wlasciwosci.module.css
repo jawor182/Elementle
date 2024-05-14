@@ -1,0 +1,143 @@
+.gameContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    background-color: #303030;
+    min-height: calc(100vh);
+    /* Adjusting for padding to prevent overflow */
+    padding: 20px;
+    box-sizing: border-box;
+    /* Include padding in the height */
+    background-image: url('../images/bg.png');
+    /* Obrazek tła */
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    height: 70vh;
+}
+
+.card {
+    width: 300px;
+    height: 470px;
+    border-radius: 30px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #167d88;
+    /* Cyan background for unrevealed cards */
+    cursor: pointer;
+}
+
+.flipped {
+    background-color: #ffffff;
+    /* White background for revealed cards */
+    z-index: 10;
+    /* Ensure flipped cards are above unflipped */
+}
+
+.cardFront,
+.cardBack {
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.cardFront {
+    background-color: transparent;
+    color: black;
+    z-index: 10;
+    /* Make sure the front is above the back */
+}
+
+.cardBack {
+    background-color: transparent;
+    z-index: 5;
+    /* Lower than the front */
+}
+
+.inputField {
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 1em;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    width: 200px;
+    max-width: 200px;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.inputField:focus {
+    border-color: #167d88;
+}
+
+.elementDetails {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.detail {
+    margin-bottom: 10px;
+}
+
+.winMessage {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 4em;
+    /* Doubled the font size */
+    padding: 40px;
+    /* Doubled the padding */
+    background-color: #28a745;
+    color: white;
+    border-radius: 20px;
+    /* Adjusted for the increased size */
+    z-index: 30;
+    /* Ensure it's above all other content, including overlay */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow */
+}
+
+
+.questionMarkStyle {
+    width: 150px;
+    height: 150px;
+    background-color: #105d66;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 80px;
+    font-weight: 900;
+}
+
+/* Overlay style */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    /* Darker semi-transparent black */
+    z-index: 20;
+    /* Below the win message but above everything else */
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    /* Smooth transition for the overlay */
+}

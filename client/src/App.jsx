@@ -8,6 +8,7 @@ import Ranking from "./pages/ranking/ranking"
 import Ustawienia from "./pages/ustawienia/ustawienia"
 import Profil from "./pages/profil/profil"
 import O_nas from './pages/o_nas/o_nas';
+import Wlasciwosci from './pages/Wlasciwosci/Wlasciwosci';
 function App() {
     const router = createBrowserRouter([
         {
@@ -29,6 +30,10 @@ function App() {
         {
             path: '/znajdowanie',
             element: <Znajdowanie/>
+        },
+        {
+            path:"/wlasciwosci",
+            element: <Wlasciwosci/>
         },
         {
             path:"/o_nas",
